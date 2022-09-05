@@ -1,0 +1,36 @@
+
+
+.navbar{
+    background-color: rgba(88, 85, 85, 0.2) !important;
+    /* background-color: #00d1f9 !important; */
+}
+
+
+.btn-outline-success{
+
+    background-color: white;
+
+}
+
+
+.btn-outline-success:hover, .bi-search:hover{
+
+    background-color: rgb(75, 136, 173);
+}
+
+
+.bi-search{
+
+    color: blue;
+}
+
+#langSelect{
+    margin-left: 1%;
+}
+
+
+select{
+    background-color: rgba(255, 255, 255, 0.184);
+    cursor: pointer;
+}
+

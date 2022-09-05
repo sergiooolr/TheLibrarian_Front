@@ -1,0 +1,64 @@
+<h1 class="text-center">
+    {{'MY_BOOKS' | translate}}
+</h1>
+<hr>
+<div class="row animate__animated animate__fadeIn ">
+    <div
+        class="col-sm-12 col-md-4 col-lg-4 align-items-stretch"
+        *ngFor="let books of book; let i = index"
+    >
+        <div class="card mb-3">
+            <a class="text-center mt-2">
+                <img *ngIf="books.book.imageLinks != 'No image available.';
+                    else imagenDisponible"
+                    class="card-img-top imga img-fluid"
+                    [src]="books.book.imageLinks"
+                    alt="Imagen del libro"
+                />
+
+                <ng-template #imagenDisponible>
+                    <img
+                        class="card-img-top imga img-fluid"
+                        src="./assets/noDisponible.png"
+                        alt="Imagen del libro"
+                    />
+                </ng-template>
+            </a>
+
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ books.book.title | slice: 0:39 }}</h5>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6 ">
+                        <ng-container *ngIf="books.book.previewLink == null ; else noDisponible">
+                            <button  class="btn btn-success btn-lg w-100 my-1"
+                                (click)="noDIsponible()">{{'MY_BOOKS_READ_BUTTON_TEXT' | translate}}</button>
+                        </ng-container>
+                        <ng-template #noDisponible>
+                            <a
+                                href="{{ books.book.previewLink }}"
+                                target="_blank"
+                                class="btn btn-lg w-100 my-1 btnc"
+                                >{{'MY_BOOKS_READ_BUTTON_TEXT' | translate}}
+                            </a>
+                        </ng-template>
+
+
+
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <button  (click)="updateReserve(books)"
+                            class="btn btn-lg w-100 my-1 btnc"
+                            >{{'MY_BOOKS_RETURN_BUTTON_TEXT' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a
+            href="https://thelibrarianback.herokuapp.com/reserve/export/pdf/{{userById.id_user}}"
+            class="btn btn-dark btn-lg mb-4"
+            >{{'MY_BOOKS_DOWNLOAD_BUTTON_TEXT' | translate}} PDF</a>
+    </div>
+</div>

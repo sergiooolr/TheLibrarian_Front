@@ -1,0 +1,55 @@
+.card {
+
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.19);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+a{
+    cursor: pointer;
+}
+
+p {
+    color: darkslategray;
+}
+
+.btn {
+    background-color: rgba(67, 109, 152);
+    color: white;
+}
+
+.btn:hover {
+    background-color: rgb(7, 51, 96);
+}
+
+.modalFoor {
+    /* background-color: rgba(15, 179, 201, 0.39); */
+    /* align-items: center; */
+    padding: 2%;
+    border: 14px solid white;
+    /* text-align: center; */
+    border-radius: 2rem;
+}
+
+.modal-title {
+    font-family: "Mouse Memoirs", sans-serif;
+    font-size: 25px;
+}
+
+#spin {
+    width: 4rem;
+    height: 4rem;
+}
+
+.imga {
+    width: 25vh;
+    height: 35vh;
+}
+
+.modal-img{
+    width: 40vh;
+}
+
+.tCard{
+    height: 65vh;
+}

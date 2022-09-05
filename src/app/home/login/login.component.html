@@ -1,0 +1,72 @@
+<div class="containerMio mx-auto" id="container">
+    <div class="form-container sign-in-container">
+
+        <form (ngSubmit)="login()" #formGrp = "ngForm">
+            <h1>Login</h1>
+            <h4>{{'LOGIN_USE_YOUR_ACCOUNT_TEXT' | translate}}</h4>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                [(ngModel)]="loginValidator.email"
+                placeholder="Email"
+                class="form-control"
+                pattern=".+@gmail\.com"
+                required
+                #email="ngModel"
+                [ngClass]="validClasses(email, 'is-valid', 'is-invalid')"
+
+            />
+
+            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                {{'LOGIN_EMAIL_REQUIRED' | translate}}
+            </div>
+
+
+
+
+            <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="loginValidator.password"
+                placeholder="{{'LOGIN_PASSWORD_PLACEHOLDER' | translate}}"
+                required
+                minlength="1" maxlength="100"
+                name="password"
+                required="required"
+                id="password"
+                #password="ngModel"
+                [ngClass]="validClasses(password, 'is-valid', 'is-invalid')"
+            />
+            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                {{'LOGIN_PASSWORD_REQUIRED' | translate}}
+            </div>
+            <a href="/forgot-password">{{'LOGIN_FORGOTTEN_PASSWORD' | translate}}</a>
+            <button class="w-100 btn btn-success btn-lg" type="submit">
+                {{'LOGIN_ACCESS_BUTTON_TEXT' | translate}}
+            </button>
+
+        </form>
+
+
+    </div>
+
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>{{'LOGIN_ACCESS_WELCOME_TEXT' | translate}}</h1>
+                <h4>{{'LOGIN_ACCESS_WELCOME_MESSAGE' | translate}}</h4>
+
+              
+                <a routerLink="/registro"
+                    ><button class="btn btn-secondary pull-right">
+                        {{'LOGIN_REGISTER_BUTTON_TEXT' | translate}}
+                    </button>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+</div>

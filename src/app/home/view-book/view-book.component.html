@@ -1,0 +1,161 @@
+<ng-container *ngIf="!bookVer; else elseTemplate">
+    <div class="mx-auto text-center">
+        <div class="spinner-border text-success" id="spin" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #elseTemplate>
+    <div class="row itemsBlock mb-5">
+        <div class="row animate__animated animate__fadeIn">
+            <div class="col-md-4 col-sm-6 col-xs-12 mt-5">
+                <div class="card card-book">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img
+                                *ngIf="
+                                    bookVer.volumeInfo.imageLinks
+                                        .smallThumbnail ==
+                                        'No image available.';
+                                    else imagenDisponible
+                                "
+                                src="./assets/noDisponible.png"
+                                alt="img"
+                            />
+                            <ng-template #imagenDisponible>
+                                <img
+                                    class="card-img-top imga img-fluid"
+                                    src="{{
+                                        bookVer.volumeInfo.imageLinks
+                                            .smallThumbnail
+                                    }}"
+                                    alt="Image Title"
+                                />
+                            </ng-template>
+                        </div>
+
+                        <div class="text-left mt-5">
+                            <p class="text-card-text">
+                                <span class="text-card-title">
+                                    <strong>
+                                        {{ "BOOK_VIEW_TITLE" | translate }}
+                                    </strong>
+                                    {{ bookVer.volumeInfo.title }}
+                                </span>
+                            </p>
+                            <p class="text-card-text">
+                                <span class="text-card-title">
+                                    <strong>
+                                        {{ "BOOK_VIEW_AUTHOR" | translate }}
+                                    </strong>
+                                    {{ bookVer.volumeInfo.authors }}
+                                </span>
+                            </p>
+                            <p class="text-card-text">
+                                <span class="text-card-title">
+                                    <strong>
+                                        {{ "BOOK_VIEW_GENRE" | translate }}
+                                    </strong>
+                                    {{ bookVer.volumeInfo.categories }}</span
+                                >
+                            </p>
+
+                            <p class="text-card-text">
+                                <span class="text-card-title">
+                                    <strong> ISBN: </strong>
+                                    {{
+                                        bookVer.volumeInfo
+                                            .industryIdentifiers[0].identifier
+                                    }}
+                                </span>
+                            </p>
+
+                            <p class="text-card-text">
+                                <span class="text-card-title">
+                                    <strong>
+                                        {{ "BOOK_VIEW_PAGES" | translate }}
+                                    </strong>
+                                    {{ bookVer.volumeInfo.pageCount }}
+                                </span>
+                            </p>
+                            <div class="col-12">
+                                <div class="d-grid gap-2 col-12">
+                                    <a
+                                        (click)="addBookDB()"
+                                        class="btn btn-success btn-lg card-button-text"
+                                    >
+                                        {{ "BOOK_VIEW_ADD_BUTTON" | translate }}
+                                    </a>
+                                    <a
+                                        class="btn btn-lg card-button-text text-light"
+                                        routerLink="/"
+                                    >
+                                        {{
+                                            "BOOK_VIEW_BACK_BUTTON" | translate
+                                        }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-6 mt-5">
+                <div class="card card-book">
+                    <div class="card-body">
+                        <div class="text-left">
+                            <p class="h3">
+                                <strong>
+                                    {{ "BOOK_VIEW_DESCRIPTION" | translate }}
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-card-text">
+                                {{
+                                    bookVer.volumeInfo.description
+                                        | striphtml
+                                        | slice: 0:200
+                                }}...
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-grid gap-2 col-12">
+                                <button
+                                    (click)="CambiarValorBoton()"
+                                    class="btn btn-lg text-light"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample"
+                                    aria-expanded="false"
+                                    aria-controls="collapseExample"
+                                >
+                                    <ng-container
+                                        *ngIf="botonVerMas; else elseTemplate"
+                                    >
+                                        {{ "BOOK_CARD_SEE_MORE" | translate }}
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        {{"BOOK_CARD_SEE_LESS" | translate}}
+                                    </ng-template>
+                                </button>
+
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        {{
+                                            bookVer.volumeInfo.description
+                                                | striphtml
+                                                | slice: 0:1500
+                                        }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
